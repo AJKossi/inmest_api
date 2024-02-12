@@ -23,7 +23,7 @@ class ClassSchedule(models.Model):
     ]
     repeat_frequency = models.CharField(max_length=1, choices=REPEAT_FREQUENCY_CHOICES, blank=True, null=True)
     is_active = models.BooleanField(default=True)
-    organizer = models.CharField(max_length=255)
+    organizer = models.ForeignKey(IMUser, on_delete=models.CASCADE,related_name='class_schedule_organizer')
     cohort = models.ForeignKey(Cohort, on_delete=models.CASCADE)
     venue = models.CharField(max_length=255)
 
