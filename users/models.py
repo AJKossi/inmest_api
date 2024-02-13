@@ -36,3 +36,6 @@ class CohortMember(models.Model):
     date_modified=models.DateTimeField(auto_now=True)
     author = models.ForeignKey(IMUser, on_delete=models.CASCADE,related_name='cohort_member_author')
 
+    def __str__(self):
+     return f"{self.member.first_name}"
+
