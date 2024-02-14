@@ -1,21 +1,19 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
-
-# Create your models here.
-class IMUser(models.Model):
-
-  class UserType(models.TextChoices):
-        EIT = "EIT", ("EIT")
-        TEACHING_FELLOW= "TEF",("TEACHING_FELLOW")
-        ADMIN_STAFF = "ADS", ("ADMIN_STAFF")
-        ADMIN = "ADM", ("ADMIN")
-
-  first_name = models.CharField(max_length=255)
-  last_name = models.CharField(max_length=255)
-  is_active = models.BooleanField(default=False)
-  user_type = models.CharField(max_length=3,choices=UserType.choices,default=UserType.EIT)
-  date_created=models.DateTimeField(auto_now_add=True)
+class IMUser(AbstractUser):
+        UserTypes = [
+          ('EIT', ('EIT')),
+          ('TEF', ('TEACHING_FELLOW')),
+          ('ADS', ('ADMIN_STAFF')),
+          ('ADM', ('ADMIN')),
+        ]
+        first_name = models.CharField(max_length=255)
+        last_name = models.CharField(max_length=255)
+        is_active = models.BooleanField(default=True)
+        user_type = models.CharField(max_length=3,choices=UserTypes)
+        date_created=models.DateTimeField(auto_now_add=True)
 
 class Cohort(models.Model):
     name = models.CharField(max_length=255)
